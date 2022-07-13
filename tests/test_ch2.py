@@ -39,4 +39,4 @@ def test_app2_validnamenotoldenough(client):
 
 def test_app2_validnamenoage(client):
     response = client.get(f'{ROUTE_BASE}parameters', query_string={'name': 'test name'})
-    assert response.status_code == 401
+    assert response.status_code == 400

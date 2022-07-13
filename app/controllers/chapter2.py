@@ -1,10 +1,13 @@
 """
 First excercise from the flask restful API linked in learning class
 """
+from http.client import BAD_REQUEST
+#from typing_extensions import Required
 from flask import Flask
 from flask import Blueprint
-from flask import jsonify
-from flask import request
+from flask import abort, jsonify, request
+from marshmallow import Schema, fields, validate, ValidationError
+from marshmallow.validate import Length, Range
 
 bp = Blueprint("chap2", __name__, url_prefix="/chap2")
 
@@ -30,8 +33,24 @@ def super_simple():
 def not_found():
     return jsonify(message='That resource was not found'), 404
 
+class ParametersSchema(Schema):
+    name = fields.Str(
+        description='The name of person whose age is being validated',
+        validate=validate.Length(max=100),
+        required=True)
+    age = fields.Int(
+        description='The integer age of name to validate.',
+        validate=Range(min=0, max=200),
+        required=True)
+
+
 @bp.route('/parameters')
 def parameters():
+    try:
+        result = ParametersSchema().load(request.args)
+    except ValidationError as err:
+        abort(BAD_REQUEST, err.messages)
+
     name = request.args.get('name')
     age = int(request.args.get('age'))
 
