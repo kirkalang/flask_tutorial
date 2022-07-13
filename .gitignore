@@ -2,4 +2,5 @@
 /.venv
 /.vscode
 /Exercise Files
-/__pycache__
+*.pyc
+*.pyo
