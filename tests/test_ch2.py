@@ -1,7 +1,7 @@
 import json
 import pytest
 
-ROUTE_BASE = '/app2/'
+ROUTE_BASE = '/chap2/'
 
 
 def test_app2_helloworld(client):
