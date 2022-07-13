@@ -3,7 +3,7 @@ First excercise from the flask restful API linked in learning class
 """
 from flask import Blueprint
 
-bp = Blueprint("app1", __name__, url_prefix="/app1")
+bp = Blueprint("chap1", __name__, url_prefix="/chap1")
 
 @bp.route('/')
 def hello():
