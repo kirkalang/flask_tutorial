@@ -18,3 +18,7 @@ def app():
 @pytest.fixture
 def client(app):
     return app.test_client()
+
+@pytest.fixture
+def route(base, remainder):
+    return f"{base}{remainder}"
