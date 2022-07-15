@@ -9,7 +9,7 @@ import os
 
 bp = Blueprint("chap3", __name__, url_prefix="/chap3")
 
-from app.model import User, Planet
+from tutorial.model import User, Planet
 
 bp.route('/planets', methods=['GET'])
 def planets():
