@@ -1,18 +1,18 @@
 import pytest
 # import app
-from app import create_app
+from app import create_app, app
 
 @pytest.fixture()
 def app():
     print('conftest: app fixture: before create_app()')
-    local_app = create_app()
-    local_app.config.update({
+    create_app()
+    app.config.update({
         "TESTING": True
     })
     print('conftest: app fixture: after app.config.update')
     
     print('conftest: app fixture: just before yield app')
-    yield local_app
+    yield app
     print('conftest: app fixture: just after   yield app')
 
 @pytest.fixture

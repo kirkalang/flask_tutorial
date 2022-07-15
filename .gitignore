@@ -4,3 +4,4 @@
 /Exercise Files
 *.pyc
 *.pyo
+app/planets.db
