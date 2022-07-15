@@ -1,4 +1,4 @@
-from app.model import db, User, Planet
+from tutorial.model import db, User, Planet
 from flask import Blueprint
 
 bp = Blueprint('db_shell', __name__)

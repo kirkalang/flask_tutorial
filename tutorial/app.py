@@ -1,8 +1,9 @@
 from flask import Flask
 import os
-from app import model
-from app import controllers
+from tutorial import model
+from tutorial import controllers
 from .commands import bp as commands_bp
+
 
 PACKAGE_NAME = "FlaskTest"
 

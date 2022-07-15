@@ -1,11 +1,11 @@
 import pytest
 # import app
-from app import create_app, app
+from tutorial.app import create_app
 
 @pytest.fixture()
 def app():
     print('conftest: app fixture: before create_app()')
-    create_app()
+    app = create_app()
     app.config.update({
         "TESTING": True
     })
