@@ -3,12 +3,6 @@ import pytest
 
 ROUTE_BASE = '/chap2/'
 
-@pytest.mark.parametrize('base, remainder', [(ROUTE_BASE, '')])
-def test_chap2_helloworld(client, route):
-    response = client.get(route)
-    assert response.status_code == 200
-    assert response.text == 'Hello World!'
-
 
 @pytest.mark.parametrize('base, remainder', [(ROUTE_BASE, 'super_simple')])
 def test_chap2_supersimple(client, route):

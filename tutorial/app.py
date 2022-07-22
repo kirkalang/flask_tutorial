@@ -1,23 +1,27 @@
-from flask import Flask
 import os
-from tutorial import model
+from flask import Flask
 from tutorial import controllers
+from tutorial.model import configure_database
 from .commands import bp as commands_bp
 
 
-PACKAGE_NAME = "FlaskTest"
+PACKAGE_NAME = 'FlaskTest'
+
 
 def create_app(config_name=None):
+    """Instantiates the Flask app and the SQLAlchemy database
+    and associated extensions. 
+    Registers the various Flask Blueprints. Using Blueprint avoid having
+    to expose the Flask app as a global variable and circular dependencies
+    
+    :param config_name: Primarilly used to specify the Test configuration
+    """
+    
     app = Flask( PACKAGE_NAME )
 
-    basedir = os.path.abspath(os.path.dirname(__file__))
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'planets.db')
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-    model.database.db.init_app(app)
-    model.database.migrate.init_app(app)
-    model.database.marshmallow.init_app(app)
-
+    with app.app_context():
+        configure_database(app, config_name)
+    
     app.register_blueprint(controllers.chapter1_bp)
     app.register_blueprint(controllers.chapter2_bp)
     app.register_blueprint(controllers.chapter3_bp)
